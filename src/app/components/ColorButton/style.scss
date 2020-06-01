@@ -1,0 +1,40 @@
+$name-color: #1A1A1A;
+$price-color: #666666;
+$border-color:  #007edb;
+
+.button {
+  text-align: center;
+  cursor: pointer;
+  padding: 8px;
+
+  &:hover:not(.selected) {
+    .image {
+      border-color: $border-color;
+    }
+  }
+
+  &.selected {
+    .image {
+      padding: 0;
+    }
+  }
+}
+
+.image {
+  width: 36px;
+  height: 36px;
+  padding: 4px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+}
+
+.name {
+  color: $name-color;
+  font-size: 12px;
+}
+
+.price {
+  color: $price-color;
+  font-size: 12px;
+}

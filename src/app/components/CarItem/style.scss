@@ -1,0 +1,29 @@
+@import 'app/utils/mixins';
+
+.item {
+  padding: 20px;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.image {
+  width: 100%;
+  @include calc(height, "100% - 60px");
+  object-fit: cover;
+}
+
+.text {
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+.model {
+  font-size: 20px;
+  color: #15171A;
+}
+
+.price {
+  font-size: 24px;
+  color: #737780;
+  margin-top: 8px;
+}

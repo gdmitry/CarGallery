@@ -1,0 +1,39 @@
+$text-color: #15171A;
+
+.widget {
+  display: flex;
+  flex-direction: column;
+  background-color: #f1f3f2;
+  align-items: center;
+  padding: 64px 38px;
+}
+
+.image {
+  width: 100%;
+}
+
+.text {
+  flex: 20 1;
+  font-size: 20px;
+  color: $text-color;
+  align-self: flex-start;
+}
+
+.model {
+  margin-bottom: 5px;
+}
+
+.color {
+  font-size: 16px;
+}
+
+.price {
+  font-size: 16px;
+  flex: 1 1;
+  margin-top: auto;
+  color: $text-color;
+
+  b {
+    font-size: 20px;
+  }
+}
