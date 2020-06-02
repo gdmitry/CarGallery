@@ -4,7 +4,7 @@ import { RootState } from 'app/reducers';
 
 export type AppThunk = ThunkAction<Promise<Object>, RootState, null, Action<string>>;
 
-export default function createAsyncAction(
+export function createAsyncAction(
   asyncFunc: Function,
   startedAction: ActionCreator<Action>,
   succeededAction: ActionCreator<Action>,

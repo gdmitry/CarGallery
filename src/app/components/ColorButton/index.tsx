@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import classNames from 'classnames';
 import style from './style.scss';
 import { ColorModel } from 'app/models';
+import { formatCurrency } from 'app/utils';
 
 export namespace ColorButton {
   export interface Props {
@@ -19,7 +20,7 @@ export const ColorButton = ({ data, data: { name, price }, iconUrl, className, o
     <div className={classNames(style.button, className, { [style.selected]: selected })} onClick={onClickHandler} >
       <img className={style.image} src={iconUrl} alt={name} />
       <div className={style.name}>{name}</div>
-      <div className={style.price}>{price === 0 ? 'Standard' : `+${price} kr.`}</div>
+      <div className={style.price}>{price === 0 ? 'Standard' : `+${formatCurrency(price)}`}</div>
     </div>
   );
 }

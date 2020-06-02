@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import { Dispatch, bindActionCreators } from 'redux';
 import { createAction } from 'redux-actions';
 import { CarModel } from 'app/models/CarModel';
-import createAsyncAction from 'app/utils/createAsyncAction';
-import { makeCarConfigurationRequest, makeCheckoutRequest } from 'app/utils/api';
+import { createAsyncAction } from 'app/utils';
+import { makeCarConfigurationRequest, makeCheckoutRequest } from 'app/utils';
 import { CheckoutModel } from 'app/models';
 
 export namespace ConfiguratorActions {

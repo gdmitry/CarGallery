@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import style from './style.scss';
+import { formatCurrency } from 'app/utils';
 
 export namespace CarWidget {
   export interface Props {
@@ -21,7 +22,7 @@ export const CarWidget = ({ className, model, trim, imageUrl, color, price }: Ca
         <div className={style.color}>{color}</div>
       </div>
       <img className={style.image} src={imageUrl} alt={model} />
-      <div className={style.price}><b>{price}</b>{` kr.`}</div>
+      <div className={style.price}>{formatCurrency(price)}</div>
     </div>
   );
 };

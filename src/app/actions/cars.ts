@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import { Dispatch, bindActionCreators } from 'redux';
 import { createAction } from 'redux-actions';
 import { CarModel } from 'app/models/CarModel';
-import createAsyncAction from 'app/utils/createAsyncAction';
-import { makeCarsRequest } from 'app/utils/api';
+import { createAsyncAction } from 'app/utils';
+import { makeCarsRequest } from 'app/utils';
 
 export namespace CarActions {
   export enum Type {

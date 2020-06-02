@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import classNames from 'classnames';
 import style from './style.scss';
 import { TrimModel } from 'app/models';
+import { formatCurrency } from 'app/utils';
 
 export namespace TrimButton {
   export interface Props {
@@ -16,7 +17,7 @@ export const TrimButton = ({ data, data: { name, price }, onClick, selected = fa
   return (
     <button className={classNames(style.button, { [style.selected]: selected })} onClick={onClickHandler} >
       <div className={style.name}>{name}</div>
-      <div className={style.price}>{`${price} kr.`}</div>
+      <div className={style.price}>{formatCurrency(price)}</div>
     </button>
   );
 }

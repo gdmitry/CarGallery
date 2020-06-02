@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import style from './style.scss';
+import { formatCurrency } from 'app/utils';
 
 export namespace CarItem {
   export interface Props {
@@ -19,7 +20,7 @@ export const CarItem = ({ className, title, imageUrl, price, linkTo }: CarItem.P
       <img className={style.image} src={imageUrl} alt={title} />
       <div className={style.text}> 
         <div className={style.model}>{title}</div>
-        <div className={style.price}>{price}</div>
+        <div className={style.price}>{formatCurrency(price)}</div>
       </div>
     </Link>
   );
