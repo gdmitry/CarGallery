@@ -9,12 +9,13 @@ export namespace TrimsPanel {
     name: string;
     trims: TrimModel[];
     setTrim: Function;
+    className?: string;
   }
 }
 
-const Panel = ({ trims, name, setTrim }: TrimsPanel.Props): JSX.Element => {
+const Panel = ({ trims, name, setTrim, className }: TrimsPanel.Props): JSX.Element => {
   const trimItems = sortBy(trims, ['price']).map((item: TrimModel) => <TrimButton key={item.name} selected={item.name === name} data={item} onClick={setTrim} />)
-  return <div>
+  return <div className={className}>
     <div className={style.title}>CHOOSE EQUIPMENT LEVEL</div>
     <div className={style.content}>{trimItems}</div>
   </div>

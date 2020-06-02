@@ -1,0 +1,34 @@
+$outline-color: #007EDB;
+$white: #FFF;
+
+.button {
+  background-color: transparent;
+  padding: 19px 22px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  font-size: 16px;
+  transform: rotate(180deg);
+
+  &.hidden {
+    transition: none;
+    visibility: hidden;
+  }
+
+  svg g {
+    fill: $outline-color;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &.forward {
+    transform: none;
+    background-color: $outline-color;
+
+    svg g {
+      fill: $white;
+    }
+  }
+}

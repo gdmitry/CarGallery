@@ -2,7 +2,7 @@ import { Dispatch, ActionCreator, Action } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'app/reducers';
 
-export type AppThunk = ThunkAction<void, RootState, null, Action<string>>
+export type AppThunk = ThunkAction<Promise<Object>, RootState, null, Action<string>>;
 
 export default function createAsyncAction(
   asyncFunc: Function,
@@ -10,16 +10,18 @@ export default function createAsyncAction(
   succeededAction: ActionCreator<Action>,
   failedAction: ActionCreator<Action>
 ) {
-  return  (...args: any[]): AppThunk => async (dispatch: Dispatch) => {
+  return (...args: any[]): AppThunk => async (dispatch: Dispatch) => {
     dispatch(startedAction(...args));
     let result;
+    let asyncOperation;
     try {
-      result = await asyncFunc(...args);
+      asyncOperation = asyncFunc(...args);
+      result = await asyncOperation;
     } catch (error) {
       dispatch(failedAction(error));
-      return;
+      throw error;
     }
     dispatch(succeededAction(result));
-    return result;
+    return asyncOperation;
   };
 }

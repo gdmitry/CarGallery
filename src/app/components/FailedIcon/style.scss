@@ -6,6 +6,9 @@
 
 .content {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
 }
 
+.button {
+  width: 33%;
+}

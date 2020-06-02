@@ -9,12 +9,13 @@ export namespace ColorPanel {
     name: string;
     colors: ColorModel[];
     setColor: Function;
+    className?: string;
   }
 }
 
-const Panel = ({ colors, name, setColor }: ColorPanel.Props): JSX.Element => {
+const Panel = ({ colors, name, setColor, className }: ColorPanel.Props): JSX.Element => {
   const colorItems = sortBy(colors, ['price']).map((item: ColorModel) => <ColorButton className={style.button} iconUrl={item.iconUrl} key={item.name} selected={item.name === name} data={item} onClick={setColor} />)
-  return <div>
+  return <div className={className}>
     <div className={style.title}>SELECT COLOR</div>
     <div className={style.content}>{colorItems}</div>
   </div>

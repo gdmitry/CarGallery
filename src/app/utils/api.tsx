@@ -8,12 +8,22 @@ export const makeCarsRequest = async (): Promise<CarModel[]> => {
   return data;
 }
 
-export const makeCarConfigurationRequest = async (code: number): Promise<Object> => {
+export const makeCarConfigurationRequest = async (code: string): Promise<Object> => {
   const data = await request(`${API_ENDPOINT}/cars/model/${code}`);
   return data;
 }
 
-export async function request (url: string, options?: Object): Promise<Object> {
+export const makeCheckoutRequest = async (modelName: string, colorName: string, trimName: string): Promise<Object> => {
+  const payload = { modelName, colorName, trimName };
+  try {
+    await request(`${API_ENDPOINT}/cars/lead`, { method: 'POST', body: JSON.stringify(payload) });
+    return 'success';
+  } catch(e) {
+    return 'failed';
+  }
+}
+
+export async function request(url: string, options?: Object): Promise<Object> {
   const params = {
     ...options,
     headers: {
@@ -21,8 +31,17 @@ export async function request (url: string, options?: Object): Promise<Object> {
       'X-API-KEY': X_API_KEY,
     },
   }
-  const result = await fetch(url, params);
-  const body = await result.json();
 
+  const result = await fetch(url, params);
+
+  if (result.status === 204) {
+    return result;
+  }
+
+  if (result.status === 500) {
+    throw new Error(result.statusText);
+  }
+
+  const body = await result.json();
   return body;
 }

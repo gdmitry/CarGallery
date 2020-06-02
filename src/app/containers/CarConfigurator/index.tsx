@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
-import { minBy, noop, indexOf } from 'lodash';
+import { minBy, noop, indexOf, find } from 'lodash';
 import style from './style.scss';
-import { RouteComponentProps, useParams } from 'react-router-dom';
+import { RouteComponentProps, useParams, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useConfiguratorActions } from 'app/actions';
 import { RootState } from 'app/reducers';
@@ -12,7 +12,11 @@ export namespace CarConfigurator {
   export interface Props extends RouteComponentProps<void> {}
 }
 
-export const CarConfigurator = (props: CarConfigurator.Props) => {
+const findCheapestColor = (colors: ColorModel[]) => minBy(colors, (item: ColorModel) => item.price);
+const findColorByName = (colors: ColorModel[], colorName: string) => find(colors, ({ name }) => colorName === name);
+const slugs = ['trims', 'colors'];
+
+export const CarConfigurator = withRouter(({ history }: CarConfigurator.Props) => {
   const dispatch = useDispatch();
   const configuratorActions = useConfiguratorActions(dispatch);
   const { code, config } = useParams();
@@ -37,7 +41,9 @@ export const CarConfigurator = (props: CarConfigurator.Props) => {
   }, [carData]);
 
   useEffect((): void => {
-    const colorValue = minBy(trim.colors, (item: ColorModel) => item.price);
+    const { colors } = trim;
+    let colorValue = color.name ? findColorByName(colors, color.name) : findCheapestColor(colors);
+    colorValue = colorValue || findCheapestColor(colors);
     colorValue ? setColor(colorValue) : noop;
   }, [trim]);
 
@@ -56,21 +62,20 @@ export const CarConfigurator = (props: CarConfigurator.Props) => {
     />
     : null, [color, totalPrice]);
 
-  const onCompleteCallback = useCallback(() => {
-    console.log("completed")
-  }, []);
+  const onCompleteCallback = useCallback(async () => {
+    const status = await configuratorActions.checkoutCarConfiguration(carData.name, color.name, trim.name);
+    history.push(`/checkout/${status}`);
+  }, [color]);
 
   const Steps = [
-    <TrimsPanel setTrim={setTrim} trims={carData.trims} name={trim.name} />,
-    <ColorPanel setColor={setColor} colors={trim.colors} name={color.name} />
+    <TrimsPanel className={style.innerPanel} setTrim={setTrim} trims={carData.trims} name={trim.name} />,
+    <ColorPanel className={style.innerPanel} setColor={setColor} colors={trim.colors} name={color.name} />
   ];
-
-  const slugs = ['trims', 'colors'];
 
   return (
     <div className={style.page}>
       {carWidget}
-      <InteractionPanel step={indexOf(slugs, config)} className={style.panel} steps={Steps} onComplete={onCompleteCallback} />
+      <InteractionPanel code={code} step={indexOf(slugs, config)} steps={Steps} onComplete={onCompleteCallback} />
     </div>
   );
-};
+});

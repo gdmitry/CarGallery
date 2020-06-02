@@ -1,0 +1,18 @@
+$button-color: #fff;
+$button-background-color: #007edb;
+
+.button {
+  padding: 19px 22px;
+  color: $button-color;
+  background-color: $button-background-color;
+  border: 1px solid $button-background-color;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+  cursor: pointer;
+  font-size: 16px;
+  outline: none;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}

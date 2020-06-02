@@ -23,6 +23,12 @@ export const configuratorReducer = handleActions<RootState.Configurator, any>(
     [ConfiguratorActions.Type.CONFIGURATION_FAILED]: (state, action) => {
       return { ...state, isLoading: false, error: action.payload };
     },
+    [ConfiguratorActions.Type.CHECKOUT_REQUESTED]: (state) => {
+      return { ...state, isLoading: true };
+    },
+    [ConfiguratorActions.Type.CHECKOUT_COMPLETED]: (state) => {
+      return { ...state, isLoading: false };
+    },
   },
   initialState
 );

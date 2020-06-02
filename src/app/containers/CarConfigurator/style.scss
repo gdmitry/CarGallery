@@ -19,5 +19,10 @@
   flex: 1 1;
   flex-direction: column;
   height: 100%;
-  overflow-y: auto;
+}
+
+.innerPanel {
+  overflow-y: scroll;
+  padding: 64px;
+  height: 100%;
 }
