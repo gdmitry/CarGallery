@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCarActions } from 'app/actions';
 import { RootState } from 'app/reducers';
-import { CarItem } from 'app/components';
+import { CarItem, Loader } from 'app/components';
 
 export namespace CarGrid {
   export interface Props extends RouteComponentProps<void> {}
@@ -20,7 +20,7 @@ export const CarGrid = (props: CarGrid.Props): JSX.Element => {
       loading: state.cars.isLoading
     };
   });
-console.log(cars, loading)
+
   React.useEffect((): void => {
     carsActions.requestCars();
   }, []);
@@ -34,6 +34,10 @@ console.log(cars, loading)
       linkTo={`models/${code}/trims`}
     />
   ), [cars]);
+
+  if (loading) {
+    return <Loader />
+  }
 
   return (
     <div className={style.page}>

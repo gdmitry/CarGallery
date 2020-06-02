@@ -9,3 +9,4 @@ export * from './NavigationButton';
 export * from './CheckoutButton';
 export * from './SuccessIcon';
 export * from './FailedIcon';
+export * from './Loader';

@@ -5,7 +5,7 @@ import { RouteComponentProps, useParams, withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useConfiguratorActions } from 'app/actions';
 import { RootState } from 'app/reducers';
-import { CarWidget, InteractionPanel, TrimsPanel, ColorPanel } from 'app/components';
+import { CarWidget, InteractionPanel, TrimsPanel, ColorPanel, Loader } from 'app/components';
 import { TrimModel, ColorModel } from 'app/models';
 
 export namespace CarConfigurator {
@@ -71,6 +71,10 @@ export const CarConfigurator = withRouter(({ history }: CarConfigurator.Props) =
     <TrimsPanel className={style.innerPanel} setTrim={setTrim} trims={carData.trims} name={trim.name} />,
     <ColorPanel className={style.innerPanel} setColor={setColor} colors={trim.colors} name={color.name} />
   ];
+
+  if (loading) {
+    return <Loader />
+  }
 
   return (
     <div className={style.page}>
