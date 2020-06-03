@@ -16,3 +16,14 @@
   background-color: hsla(0, 0%, 100%, 0.5);
   backdrop-filter: blur(10px);
 }
+
+@media screen and (max-width: 900px) {
+  .panel {
+    position: static;
+    width: 100%;
+  }
+
+  .navigationBar {
+    position: fixed;
+  }
+}

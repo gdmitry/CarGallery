@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import classNames from 'classnames';
 import style from './style.scss';
@@ -25,6 +25,10 @@ export const InteractionPanel = withRouter(({ history, className, code, onComple
     setStepIndex(stepIndex + 1);
     history.push(`/models/${code}/colors`);
   }, [steps]);
+
+  useEffect(() => {
+    setStepIndex(step);
+  }, [step]);
 
   if (!code) return null;
 

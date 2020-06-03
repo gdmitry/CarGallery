@@ -16,7 +16,7 @@ export namespace TrimsPanel {
 const Panel = ({ trims, name, setTrim, className }: TrimsPanel.Props): JSX.Element => {
   const trimItems = sortBy(trims, ['price']).map((item: TrimModel) => <TrimButton key={item.name} selected={item.name === name} data={item} onClick={setTrim} />)
   return <div className={className}>
-    <div className={style.title}>CHOOSE EQUIPMENT LEVEL</div>
+    <h1 className={style.title}>CHOOSE EQUIPMENT LEVEL</h1>
     <div className={style.content}>{trimItems}</div>
   </div>
 };

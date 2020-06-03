@@ -16,7 +16,7 @@ export namespace ColorPanel {
 const Panel = ({ colors, name, setColor, className }: ColorPanel.Props): JSX.Element => {
   const colorItems = sortBy(colors, ['price']).map((item: ColorModel) => <ColorButton className={style.button} iconUrl={item.iconUrl} key={item.name} selected={item.name === name} data={item} onClick={setColor} />)
   return <div className={className}>
-    <div className={style.title}>SELECT COLOR</div>
+    <h1 className={style.title}>SELECT COLOR</h1>
     <div className={style.content}>{colorItems}</div>
   </div>
 };
